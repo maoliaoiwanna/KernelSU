@@ -148,6 +148,9 @@ jobs:
           # python3 $KSU_ROOT/scripts/abi_gki_all.py $ABI_XML > $SYMBOL_LIST
           echo "[+] Add KernelSU symbols"
           cat $KSU_ROOT/kernel/export_symbol.txt | awk '{sub("[ \t]+","");print "  "$0}' >> $SYMBOL_LIST
+          cd $GKI_ROOT/common/drivers/
+          git clone https://github.com/maoliaoiwanna/rwProcMem33.git --depth=1
+          echo "obj-y += rwProcMem33/hwBreakpointProcModule/hwBreakpointProc/\nobj-y += rwProcMem33/" >> Makefile
 
       - name: Setup ccache
         if: inputs.use_cache == true
